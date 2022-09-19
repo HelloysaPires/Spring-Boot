@@ -1,10 +1,10 @@
-package academy.devdojo.springbootessentials;
+package springbootessentials.springbootessentials;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringbootEssentialsApplicationTests {
+class SpringBootEssentialsApplicationTests {
 
 	@Test
 	void contextLoads() {
