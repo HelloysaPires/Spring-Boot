@@ -1,13 +1,13 @@
-package springbootessentials.springbootessentials;
+package academy.devdojo.springbootessentials;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootEssentialsApplication {
+public class SpringbootEssentialsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootEssentialsApplication.class, args);
+		SpringApplication.run(SpringbootEssentialsApplication.class, args);
 	}
 
 }
