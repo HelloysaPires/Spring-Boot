@@ -7,11 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.Builder;
-
 // @Data
 // @AllArgsConstructor
-@Builder
+// @Builder
 @Entity
 public class Anime {
 
@@ -59,9 +57,5 @@ public class Anime {
 		Anime other = (Anime) obj;
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
-	
-	
-	
-	
-	
+
 }

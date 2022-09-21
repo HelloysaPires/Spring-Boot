@@ -2,21 +2,24 @@ package academy.devdojo.springbootessentials.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import academy.devdojo.springbootessentials.domain.Anime;
 import academy.devdojo.springbootessentials.repository.AnimeRepository;
-import academy.devdojo.springbootessentials.request.AnimePostRequestBody;
 
 @Service
 public class AnimeService {
 
-	@Autowired
-	private AnimeRepository animeRepository;	
+	// @Autowired
+	private final AnimeRepository animeRepository;		
 	
+	public AnimeService(AnimeRepository animeRepository) {
+		super();
+		this.animeRepository = animeRepository;
+	}
+
 	public List<Anime> listAll(){
 		return animeRepository.findAll();
 	}
@@ -26,6 +29,10 @@ public class AnimeService {
 							  .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime ID not found"));
 	}
 
+	public List<Anime> findByName(String name){
+		return animeRepository.findByName(name);
+	}
+	
 	public Anime save(Anime anime) {
 		anime.setId(null);
 		return animeRepository.save(anime);
