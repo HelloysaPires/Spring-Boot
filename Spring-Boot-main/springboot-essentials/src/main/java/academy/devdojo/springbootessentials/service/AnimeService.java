@@ -2,11 +2,13 @@ package academy.devdojo.springbootessentials.service;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.transaction.annotation.Transactional;
 
 import academy.devdojo.springbootessentials.domain.Anime;
+import academy.devdojo.springbootessentials.exceptions.BadRequestException;
 import academy.devdojo.springbootessentials.repository.AnimeRepository;
 
 @Service
@@ -19,6 +21,10 @@ public class AnimeService {
 		super();
 		this.animeRepository = animeRepository;
 	}
+	
+	public Page<Anime> list(Pageable pageable) {
+		return animeRepository.findAll(pageable);
+	}
 
 	public List<Anime> listAll(){
 		return animeRepository.findAll();
@@ -26,16 +32,21 @@ public class AnimeService {
 	
 	public Anime findByIdOrThrowBadRequestException(Long id){
 		return animeRepository.findById(id)
-							  .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Anime ID not found"));
+							  .orElseThrow(() -> new BadRequestException("Anime ID not found"));
 	}
 
 	public List<Anime> findByName(String name){
 		return animeRepository.findByName(name);
 	}
 	
+	@Transactional(rollbackFor = Exception.class)
 	public Anime save(Anime anime) {
 		anime.setId(null);
-		return animeRepository.save(anime);
+		Anime save = animeRepository.save(anime);
+		
+		// if(true) throw new RuntimeException("Teste");
+		
+		return save;
 	}
 
 	public void delete(Long id) {
